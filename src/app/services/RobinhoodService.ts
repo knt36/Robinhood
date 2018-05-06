@@ -79,7 +79,6 @@ export class RobinhoodService {
     user_basic_info: "user/basic_info/",
     user_employment: "user/employment/",
     user_investment_profile: "user/investment_profile/",
-
     watchlists: 'watchlists/Default',
     positions: 'positions/',
     fundamentals: 'fundamentals/',
@@ -316,6 +315,7 @@ export class RobinhoodService {
         headers: this.setHeaders()
       }).subscribe(res => {
         const watchList = [];
+        console.log(res.json());
         res.json().results.forEach(data => {
           watchList.push(new StockModule.Stock(data, StockType.WATCHLIST));
         });
@@ -874,7 +874,9 @@ export class RobinhoodService {
           headers: this.setHeaders()
         }).subscribe(res => {
           const dict = {};
-          const resArray = res.json().results;
+          let resArray = res.json().results;
+          resArray = resArray.filter((resultItem) => resultItem != null);
+          console.log(resArray);
           resArray.forEach( item =>{
             dict[item.symbol] = item;
           });

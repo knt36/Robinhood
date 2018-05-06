@@ -70,13 +70,16 @@ export class WatchStockTileComponent implements OnInit, OnChanges{
   }
 
   ngOnChanges(){
-    this.setDisplay();
+    if (this.stock.instrument.tradeable){
+      this.setDisplay();
+    }
   }
 
   ngOnInit() {
     this.order = {
       quantity: 1,
-      price: this.stock.instrument.quote.last_trade_price,
+      price: this.stock && this.stock.instrument && this.stock.instrument.quote && this.stock.instrument.quote.last_trade_price ?
+        this.stock.instrument.quote.last_trade_price : 0,
       type: this.orderTypes[0]
     };
   }
@@ -138,7 +141,8 @@ export class WatchStockTileComponent implements OnInit, OnChanges{
    * for stock with price > $1
    */
   updatePrice(){
-    this.order.price = Number(this.stock.instrument.quote.last_trade_price).toFixed(2);
+    this.order.price = this.stock && this.stock.instrument && this.stock.instrument.quote && this.stock.instrument.quote.last_trade_price ?
+      Number(this.stock.instrument.quote.last_trade_price).toFixed(2): 0;
   }
 
   showStockPanel(){
