@@ -25,8 +25,6 @@ import Portfolio = AccountModule.Portfolio;
 import Instrument = StockModule.Instrument;
 import StockType = StockModule.StockType;
 import {NotificationsService} from "angular2-notifications/dist";
-import {Subject} from "rxjs/Subject";
-import {Observable} from "rxjs";
 @Injectable()
 
 export class RobinhoodService {
@@ -138,7 +136,6 @@ export class RobinhoodService {
       return (false);
     }
   }
-
 
   startService() {
     return (new Promise((resolve, reject) => {

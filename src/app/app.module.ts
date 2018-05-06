@@ -23,6 +23,7 @@ import {WatchStockTileComponent} from "./components/stockTile/watchStockTile/wat
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {SimpleNotificationsModule} from "angular2-notifications/dist";
 import {StockPanelComponent} from "./components/stockPanel/stock-panel.component";
+import { PositionStockTileComponent } from './components/stockTile/position-stock-tile/position-stock-tile.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {StockPanelComponent} from "./components/stockPanel/stock-panel.component
       ContactComponent,
       OrderPanelComponent,
       WatchStockTileComponent,
-      StockPanelComponent
+      StockPanelComponent,
+      PositionStockTileComponent
 
   ],
   imports: [

@@ -9,6 +9,8 @@ import {RobinhoodService} from "../../../services/RobinhoodService";
 import {StockModule} from "../../../model/Stock.model";
 import {Constant} from "../../../model/constant";
 import StockType = StockModule.StockType;
+import {StockTileComponent} from "../stock-tile.component";
+import {NotificationsService} from "angular2-notifications/dist";
 
 @Component({
   selector: 'watch-stock-tile',
@@ -17,18 +19,11 @@ import StockType = StockModule.StockType;
 })
 
 
-export class WatchStockTileComponent implements OnInit, OnChanges{
+export class WatchStockTileComponent extends StockTileComponent implements OnInit {
 
-  @Input('stock') stock: Stock;
-  @Output()
-  showPanel:EventEmitter<string> = new EventEmitter();
-
-  public order;
-  orderTypes = [
-    'Limit', 'Market',
-    // 'Stop Limit',
-    'Stop Loss'
-  ];
+  constructor(public notification:NotificationsService,   public decimalPipe: DecimalPipe,public rb:RobinhoodService) {
+    super(notification, decimalPipe, rb);
+  }
 
   public display={
     symbol:"loading",
@@ -62,26 +57,6 @@ export class WatchStockTileComponent implements OnInit, OnChanges{
     rightButton:{
       label:"Buy"
     }
-  }
-
-  public StockType = null;
-  constructor(public decimalPipe: DecimalPipe,public rb:RobinhoodService){
-    this.StockType = StockType;
-  }
-
-  ngOnChanges(){
-    if (this.stock.instrument.tradeable){
-      this.setDisplay();
-    }
-  }
-
-  ngOnInit() {
-    this.order = {
-      quantity: 1,
-      price: this.stock && this.stock.instrument && this.stock.instrument.quote && this.stock.instrument.quote.last_trade_price ?
-        this.stock.instrument.quote.last_trade_price : 0,
-      type: this.orderTypes[0]
-    };
   }
 
   setDisplay(){
@@ -120,34 +95,4 @@ export class WatchStockTileComponent implements OnInit, OnChanges{
   leftButton(){
     this.rb.removeStockFromWatchList(this.stock.instrument)
   }
-
-  /**
-   * Right Button is a Buy Button
-   */
-  rightButton(){
-    if(this.order.type === "Market"){
-      this.rb.MarketBuy(this.stock, this.order.price, this.order.quantity);
-    }else if (this.order.type === "Limit"){
-      this.rb.ImmediateLimitBuy(this.stock, this.order.price, this.order.quantity);
-    }else if (this.order.type === "Stop Loss"){
-      this.rb.StopLossBuy(this.stock, this.order.quantity, this.order.price);
-    }
-  }
-
-
-
-  /**
-   * Need to round the price to 2 decimal points or Robinhood will not take the order
-   * for stock with price > $1
-   */
-  updatePrice(){
-    this.order.price = this.stock && this.stock.instrument && this.stock.instrument.quote && this.stock.instrument.quote.last_trade_price ?
-      Number(this.stock.instrument.quote.last_trade_price).toFixed(2): 0;
-  }
-
-  showStockPanel(){
-    // TODO get the correct string / element to pass in
-    this.showPanel.emit(this.stock.display.symbol);
-  }
-
 }
