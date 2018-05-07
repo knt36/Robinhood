@@ -25,6 +25,7 @@ import Portfolio = AccountModule.Portfolio;
 import Instrument = StockModule.Instrument;
 import StockType = StockModule.StockType;
 import {NotificationsService} from "angular2-notifications/dist";
+import {Fundamentals} from "../model/Fundamentals.model";
 @Injectable()
 
 export class RobinhoodService {
@@ -885,7 +886,7 @@ export class RobinhoodService {
     )
   }
 
-  getFundamentals(symbol): Promise<any>{
+  getFundamentals(symbol): Promise<Fundamentals>{
     return(
       new Promise((resolve, reject) => {
         this.http.get(this._proxyURL + this._endpoints.fundamentals + symbol + '/', {

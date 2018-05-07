@@ -1,7 +1,8 @@
 <div class="container">
   <div id="info">
     <div class="left">
-      <h5>{{this.display.title.value}}<span [ngClass]="this.display.title.descriptionColor">${{this.display.title.description}}</span></h5>
+      <h4>{{this.display.title.value}}<span [ngClass]="this.display.title.descriptionColor">${{this.display.title.description}}</span>
+      </h4>
       <h6><span [ngClass]="this.display.title.descriptionColor">{{this.display.subTitle.value1}}%</span> Today</h6>
     </div>
     <div class="right">
@@ -10,9 +11,24 @@
     </div>
   </div>
   <div class="stock-chart" style="display:block">
-    <line-chart [pointSize]="2" style="display:block; width: 100%; height: 100%" [symbol]="this.stock.instrument.symbol"></line-chart>
+    <line-chart [pointSize]="2" style="display:block; width: 100%; height: 100%"
+                [symbol]="this.stock.instrument.symbol"></line-chart>
   </div>
-  <div class="d-flex carousel">
-
+  <div class="carousel">
+    <h5>{{this.display.companyName}}</h5>
+    <div class="numericData">
+      <div *ngFor="let i of this.display.dataItems" class="data-item">
+        <h5 class="text-muted">{{i.label}}</h5>
+        <h6>{{i.detail}}</h6>
+      </div>
+    </div>
+    <div class="company-summary">
+      <div>
+        <h5>Details</h5>
+      </div>
+      <div class="company-details">
+        {{this.display.details}}
+      </div>
+    </div>
   </div>
 </div>

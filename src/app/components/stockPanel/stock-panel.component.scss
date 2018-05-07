@@ -14,36 +14,20 @@
     margin: 10px 0px;
   }
 
-  h5 {
-    font-size: $lg-font-size;
-    margin-bottom: 8px;
-    margin-top: 0px;
-
-    span {
-      color: $green-color;
-      text-transform: uppercase;
-      font-size: $xs-font-size;
-      margin-left: 10px;
-    }
-  }
-
-  h6{
-    color: $normal-font-color;
-    text-transform: uppercase;
-    font-size: $xs-font-size;
-    margin: 8px auto;
-  }
-
   p {
     color: $normal-font-color;
     font-size: $xs-font-size;
     margin: 8px auto;
   }
 
+  .company-summary{
+    .company-details{
+      text-align:justify-all;
+    }
+  }
+
   #info{
     height: 50px;
-    background-color: yellow;
-
     @include flex-div-btw();
   }
 
@@ -51,8 +35,17 @@
     height: 200px;
   }
   .carousel{
-    background-color: greenyellow;
     height: 60%;
+    overflow-y: scroll;
   }
-
+  .numericData{
+    display:flex;
+    justify-content: center;
+    flex-flow: wrap;
+    margin:0px !important;
+    .data-item{
+      min-width: 33%;
+      margin:0px !important;
+    }
+  }
 }
