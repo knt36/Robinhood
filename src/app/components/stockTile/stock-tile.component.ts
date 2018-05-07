@@ -74,6 +74,8 @@ export class StockTileComponent implements OnInit, OnChanges {
   ngOnChanges() {
     if (this.stock.instrument.tradeable) {
       this.setDisplay();
+    } else if(!this.stock.instrument.tradeable) {
+      this.setDisplayNonTradable();
     }
   }
 
@@ -84,6 +86,11 @@ export class StockTileComponent implements OnInit, OnChanges {
         this.stock.instrument.quote.last_trade_price : 0,
       type: this.orderTypes[0]
     };
+  }
+
+  setDisplayNonTradable(){
+    this.display.symbol = this.stock.instrument.symbol;
+    this.display.price = 'Not Traded';
   }
 
   setDisplay() {

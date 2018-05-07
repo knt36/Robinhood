@@ -1,16 +1,16 @@
 <div class="container">
   <div id="info">
     <div class="left">
-      <h5>AMD<span>$341.5</span></h5>
-      <h6>+1.23 (1.4%) Today</h6>
+      <h5>{{this.display.title.value}}<span [ngClass]="this.display.title.descriptionColor">${{this.display.title.description}}</span></h5>
+      <h6><span [ngClass]="this.display.title.descriptionColor">{{this.display.subTitle.value1}}%</span> Today</h6>
     </div>
     <div class="right">
       <button class="btn icon-btn" (click)="closePanel()"><span class="glyphicon glyphicon-remove"></span></button>
 
     </div>
   </div>
-  <div class="stock-chart">
-
+  <div class="stock-chart" style="display:block">
+    <line-chart [pointSize]="2" style="display:block; width: 100%; height: 100%" [symbol]="this.stock.instrument.symbol"></line-chart>
   </div>
   <div class="carousel">
   </div>

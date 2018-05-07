@@ -42,7 +42,8 @@ export class OverviewComponent {
       this.showStockPanel = false;
     }
 
-    openStockPanel(event){
+    openStockPanel(selectedStock){
+      this.selectedStock = selectedStock;
       this.showStockPanel = true;
     }
 

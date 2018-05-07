@@ -1,7 +1,7 @@
 /**
  * Created by anhle on 8/7/17.
  */
-import {Component, Input, OnInit, OnDestroy, ViewChild, ChangeDetectorRef} from '@angular/core';
+import {Component, Input, OnInit, OnDestroy, ViewChild, ChangeDetectorRef, OnChanges} from '@angular/core';
 import {GraphData} from "../../model/Historical.model";
 import {Constant} from "../../model/constant";
 import {RobinhoodService} from "../../services/RobinhoodService";
@@ -15,10 +15,12 @@ declare var google:any;
     templateUrl: './chart.component.html',
 })
 
-export class ChartComponent implements OnInit, OnDestroy{
-
+export class ChartComponent implements OnInit, OnDestroy, OnChanges{
+  @Input('pointSize') pointSize: number;
   @ViewChild(BaseChartDirective) chartElement: BaseChartDirective;
-
+  public gainingColor = 'rgb(0,255,0,1)';
+  public losingColor = 'rgb(255,0,0, 1)';
+  public neutral = 'rgb(2, 237, 119,1)';
   // lineChart
   public lineChartData:Array<any> = [
     {data: [], label: 'Stock'}
@@ -42,9 +44,10 @@ export class ChartComponent implements OnInit, OnDestroy{
         point:
           {
             display:false,
-            radius: 0.5,
-            hitRadius: 0.5,
-            hoverRadius: 12,
+            radius: 0,
+            hitRadius: 10,
+            hoverRadius: 5,
+            backgroundColor: 'black',
             hoverBorderWidth: 2
           }
       },
@@ -54,9 +57,10 @@ export class ChartComponent implements OnInit, OnDestroy{
   };
   public lineChartColors:Array<any> = [
     { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
+      backgroundColor: 'white',
+      borderColor: this.neutral,
+      pointBackgroundColor: 'black',
+      borderWidth: 1
     }
   ];
 
@@ -77,12 +81,12 @@ export class ChartComponent implements OnInit, OnDestroy{
 
     @Input('symbol') symbol:string;
 
-
     constructor(public rb:RobinhoodService, public c: ChangeDetectorRef){
 
     }
 
     ngOnInit() {
+        this.lineChartOptions.elements.point.radius = this.pointSize != null ? this.pointSize : 0;
         this.updateGraph();
         this.getGraphInterval = setInterval(() => {
             this.updateGraph();
@@ -91,6 +95,14 @@ export class ChartComponent implements OnInit, OnDestroy{
 
     ngOnDestroy(){
         clearInterval(this.getGraphInterval);
+    }
+
+    ngOnChanges(){
+      clearInterval(this.getGraphInterval);
+      this.updateGraph();
+      this.getGraphInterval = setInterval(() => {
+        this.updateGraph();
+      }, this.graphInterval);
     }
 
 
@@ -108,7 +120,7 @@ export class ChartComponent implements OnInit, OnDestroy{
         const labels = [];
         newLineChartData.push({
           data: [],
-          label: "stock"
+          label: "price"
         });
         this.rb.getHistoricalsData(this.symbol, this.graphOptions).then( x => {
           x.data.forEach(item=>{

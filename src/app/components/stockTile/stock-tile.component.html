@@ -5,7 +5,7 @@
       <h4>{{this.display.symbol}}</h4>
     </div>
     <div class="graph">
-      <line-chart [symbol] = "this?.stock?.instrument?.symbol" ></line-chart>
+      <line-chart style="display: block; width: 80px; height: 50px;" [symbol] = "this?.stock?.instrument?.symbol" ></line-chart>
     </div>
     <div class="text-right">
       <h3 [ngClass]="this.display.dailyPercentChangeClass"><span></span>{{this.display.price}}</h3>

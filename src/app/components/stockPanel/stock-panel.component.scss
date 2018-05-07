@@ -45,12 +45,9 @@
     background-color: yellow;
 
     @include flex-div-btw();
-
-
   }
 
   .stock-chart{
-    background-color: cornflowerblue;
     height: 200px;
   }
   .carousel{
