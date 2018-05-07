@@ -77,7 +77,7 @@ export class ChartComponent implements OnInit, OnDestroy, OnChanges{
     private getGraphInterval:any;
 
     // change this variable as later we allow users to choose their own settings
-    private graphInterval:number = (5*60*1000);
+    private graphInterval:number = (2*60*1000) +  Math.random() % (2*60*1000);
 
     @Input('symbol') symbol:string;
 
