@@ -884,5 +884,19 @@ export class RobinhoodService {
       })
     )
   }
+
+  getFundamentals(symbol): Promise<any>{
+    return(
+      new Promise((resolve, reject) => {
+        this.http.get(this._proxyURL + this._endpoints.fundamentals + symbol + '/', {
+          headers: this.setHeaders()
+        }).subscribe(res => {
+          resolve(res.json());
+        }, error =>{
+          reject(error);
+        })
+      })
+    )
+  }
 }
 

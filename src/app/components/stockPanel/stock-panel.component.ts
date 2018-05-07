@@ -40,10 +40,21 @@ export class StockPanelComponent implements OnChanges
   }
 
   ngOnChanges(){
+    this.setDisplay();
+    this.rb.getFundamentals(this.stock.instrument.symbol).then( res=> {
+      console.log(res);
+    })
+  }
+
+  setDisplay(){
     this.display.title.value = this.stock.display.symbol;
     this.display.title.description = this.stock.display.price;
     this.display.subTitle.value1 = this.stock.display.percent_change;
     this.display.title.descriptionColor = this.stock.display.stock_gain;
+  }
+
+  setDisplayFundamentals(){
+
   }
 
   closePanel(){
