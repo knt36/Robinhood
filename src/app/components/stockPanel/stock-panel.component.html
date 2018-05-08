@@ -15,6 +15,13 @@
                 [symbol]="this.stock.instrument.symbol"></line-chart>
   </div>
   <div class="carousel">
+    <div class="time-range-selector">
+      <button type="button" class="btn btn-success">Day</button>
+      <button type="button" class="btn btn-success">Week</button>
+      <button type="button" class="btn btn-success">Month</button>
+      <button type="button" class="btn btn-success">Year</button>
+      <button type="button" class="btn btn-success">5 Year</button>
+    </div>
     <h5>{{this.display.companyName}}</h5>
     <div class="numericData">
       <div *ngFor="let i of this.display.dataItems" class="data-item">

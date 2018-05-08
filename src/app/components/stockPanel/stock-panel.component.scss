@@ -49,3 +49,13 @@
     }
   }
 }
+
+.time-range-selector {
+  display: flex;
+  justify-content: center;
+  button{
+    padding-left:5px;
+    padding-right: 5px;
+    min-width:5em;
+  }
+}

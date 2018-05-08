@@ -7,3 +7,12 @@ body {
   background-color: $background-color;
   position: relative;
 }
+
+
+.btn-success{
+  background-color: #1abc9c;
+  border-color: darken(#1abc9c, 10%);
+}
+.btn-success:hover{
+  background-color: darken(#1abc9c, 10%);
+}
