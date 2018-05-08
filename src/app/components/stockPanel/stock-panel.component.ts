@@ -43,7 +43,7 @@ export class StockPanelComponent implements OnChanges
   ngOnChanges(){
     this.setDisplay();
     this.rb.getFundamentals(this.stock.instrument.symbol).then( res=> {
-      this.display.dataItems = [];
+      this.clearDataItems();
       this.addDataItem('Average Volume', res.average_volume);
       this.addDataItem('CEO', res.ceo);
       this.addDataItem('Dividend Yield', res.dividend_yield !== '' && res.dividend_yield != null ? res.dividend_yield : 'NA');
@@ -74,6 +74,10 @@ export class StockPanelComponent implements OnChanges
 
   addDataItem(label: string, detail: string){
     this.display.dataItems.push(new DataItem(label, detail));
+  }
+
+  clearDataItems(){
+    this.display.dataItems = [];
   }
 }
 
