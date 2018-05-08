@@ -58,4 +58,8 @@
     padding-right: 5px;
     min-width:5em;
   }
+
+  .selected{
+    background-color: darken($green-color, 25%);
+  }
 }

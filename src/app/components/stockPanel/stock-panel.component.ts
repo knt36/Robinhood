@@ -88,8 +88,8 @@ export class StockPanelComponent implements OnChanges
 class DataItem{
   public label: string;
   public detail: string;
-  constructor(labe: string, detail: string){
-    this.label = labe;
+  constructor(label: string, detail: string){
+    this.label = label;
     this.detail = detail;
   }
 }

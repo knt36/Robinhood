@@ -16,11 +16,11 @@
   </div>
   <div class="carousel">
     <div class="time-range-selector">
-      <button (click)="this.setChartSpan('day')" type="button" class="btn btn-success">Day</button>
-      <button (click)="this.setChartSpan('week')" type="button" class="btn btn-success">Week</button>
-      <button (click)="this.setChartSpan('month')" type="button" class="btn btn-success">Month</button>
-      <button (click)="this.setChartSpan('year')" type="button" class="btn btn-success">Year</button>
-      <button (click)="this.setChartSpan('5-year')" type="button" class="btn btn-success">5 Year</button>
+      <button [ngClass]="{selected: this.selectedSpan === 'day'}" (click)="this.setChartSpan('day')" type="button" class="btn btn-success">Day</button>
+      <button [ngClass]="{selected: this.selectedSpan === 'week'}" (click)="this.setChartSpan('week')" type="button" class="btn btn-success">Week</button>
+      <button [ngClass]="{selected: this.selectedSpan === 'month'}" (click)="this.setChartSpan('month')" type="button" class="btn btn-success">Month</button>
+      <button [ngClass]="{selected: this.selectedSpan === 'year'}" (click)="this.setChartSpan('year')" type="button" class="btn btn-success">Year</button>
+      <button [ngClass]="{selected: this.selectedSpan === '5-year'}" (click)="this.setChartSpan('5-year')" type="button" class="btn btn-success">5 Year</button>
     </div>
     <h5>{{this.display.companyName}}</h5>
     <div class="numericData">
