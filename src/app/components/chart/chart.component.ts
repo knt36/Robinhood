@@ -17,6 +17,8 @@ declare var google:any;
 
 export class ChartComponent implements OnInit, OnDestroy, OnChanges{
   @Input('pointSize') pointSize: number;
+  @Input('isGaining') isGaining: boolean;
+  @Input('span') span = 'day';
   @ViewChild(BaseChartDirective) chartElement: BaseChartDirective;
   public gainingColor = 'rgb(0,255,0,1)';
   public losingColor = 'rgb(255,0,0, 1)';
@@ -46,7 +48,7 @@ export class ChartComponent implements OnInit, OnDestroy, OnChanges{
             display:false,
             radius: 0,
             hitRadius: 10,
-            hoverRadius: 5,
+            hoverRadius: 2,
             backgroundColor: 'black',
             hoverBorderWidth: 2
           }
@@ -59,7 +61,7 @@ export class ChartComponent implements OnInit, OnDestroy, OnChanges{
     { // grey
       backgroundColor: 'white',
       borderColor: this.neutral,
-      pointBackgroundColor: 'black',
+      pointBackgroundColor: 'yellow',
       borderWidth: 1
     }
   ];
@@ -122,7 +124,7 @@ export class ChartComponent implements OnInit, OnDestroy, OnChanges{
           data: [],
           label: "price"
         });
-        this.rb.getHistoricalsData(this.symbol, this.graphOptions).then( x => {
+        this.rb.getHistoricalsData(this.symbol, this.span).then( x => {
           x.data.forEach(item=>{
             newLineChartData[0].data.push(item);
             labels.push(item);

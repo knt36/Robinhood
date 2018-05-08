@@ -22,7 +22,7 @@ export class StockPanelComponent implements OnChanges
   @Input('stock') stock: Stock;
   @Output()
   panelEvent:EventEmitter<string> = new EventEmitter();
-
+  selectedSpan = 'day';
   public display ={
     title : {
       value: 'loading...',
@@ -78,6 +78,10 @@ export class StockPanelComponent implements OnChanges
 
   clearDataItems(){
     this.display.dataItems = [];
+  }
+
+  setChartSpan(span){
+    this.selectedSpan = span;
   }
 }
 

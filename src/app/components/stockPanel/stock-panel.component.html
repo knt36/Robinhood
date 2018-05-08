@@ -11,16 +11,16 @@
     </div>
   </div>
   <div class="stock-chart" style="display:block">
-    <line-chart [pointSize]="2" style="display:block; width: 100%; height: 100%"
+    <line-chart [span]="this.selectedSpan" [pointSize]="1" style="display:block; width: 100%; height: 100%"
                 [symbol]="this.stock.instrument.symbol"></line-chart>
   </div>
   <div class="carousel">
     <div class="time-range-selector">
-      <button type="button" class="btn btn-success">Day</button>
-      <button type="button" class="btn btn-success">Week</button>
-      <button type="button" class="btn btn-success">Month</button>
-      <button type="button" class="btn btn-success">Year</button>
-      <button type="button" class="btn btn-success">5 Year</button>
+      <button (click)="this.setChartSpan('day')" type="button" class="btn btn-success">Day</button>
+      <button (click)="this.setChartSpan('week')" type="button" class="btn btn-success">Week</button>
+      <button (click)="this.setChartSpan('month')" type="button" class="btn btn-success">Month</button>
+      <button (click)="this.setChartSpan('year')" type="button" class="btn btn-success">Year</button>
+      <button (click)="this.setChartSpan('5-year')" type="button" class="btn btn-success">5 Year</button>
     </div>
     <h5>{{this.display.companyName}}</h5>
     <div class="numericData">

@@ -730,6 +730,45 @@ export class RobinhoodService {
    * @returns {Promise}
    */
   getHistoricalsData(symbol, options): Promise<GraphData> {
+    const preset = {
+      interval: null,
+      span: null,
+      bound: null
+    }
+
+    const orgOptions = options;
+
+    if (options === 'day'){
+      preset.bound = 'trading';
+      preset.span = 'day';
+      preset.interval = '5minute';
+      options = preset;
+    }else if (options === 'week'){
+      preset.bound = 'regular';
+      preset.span = 'week';
+      preset.interval = '10minute';
+      options = preset;
+    }else if (options === 'month') {
+      preset.bound = 'regular';
+      preset.span = 'year';
+      preset.interval = 'day';
+      options = preset;
+    }else if (options === '3-month') {
+      preset.bound = 'regular';
+      preset.span = 'year';
+      preset.interval = 'day';
+      options = preset;
+    } else if(options === 'year'){
+      preset.bound = 'regular';
+      preset.span = 'year';
+      preset.interval = 'day';
+      options = preset;
+    } else if (options === '5-year') {
+      preset.bound = 'regular';
+      preset.span = '5year';
+      preset.interval = 'week';
+      options = preset;
+    }
 
     return (new Promise((resolve, reject) => {
       const params: URLSearchParams = new URLSearchParams();
