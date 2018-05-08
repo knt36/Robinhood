@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
       if(this.rh.isAlreadyLoggedOn()){
-        this.router.navigateByUrl("home");
+        this.router.navigateByUrl("home/overview");
       }
     }
 
