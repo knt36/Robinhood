@@ -118,7 +118,7 @@ export class TopBarComponent {
             },
             {
               name: "buying power",
-              value: this.rb.account.information.buying_power || 0
+              value: this.rb.account.information.margin_balances.unallocated_margin_cash || this.rb.account.information.buying_power
             }
           ]
         );
